@@ -39,7 +39,7 @@ DATE=`date +%Y-%m-%d.%H.%M`
 BACKUPPATH=~/backups
 
 #get the current dir path
-cd WEBROOT
+cd $WEBROOT
 DIR=`pwd`
 echo "Current directory is: " $DIR
 

@@ -26,6 +26,11 @@
 
 #Webroot
 #WEBROOT=[figure this out!]
+# Note - we can use wp config path to identify the web root assuming that wp-config.php is stored there: 
+# wp config path
+# /home/example/domains/example.com/public_html/wp-config.php
+
+WEBROOT=$(dirname `wp config path` )
 
 #Current datetime
 DATE=`date +%Y-%m-%d.%H.%M`
@@ -34,7 +39,7 @@ DATE=`date +%Y-%m-%d.%H.%M`
 BACKUPPATH=~/backups
 
 #get the current dir path
-
+cd WEBROOT
 DIR=`pwd`
 echo "Current directory is: " $DIR
 

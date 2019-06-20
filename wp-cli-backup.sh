@@ -56,14 +56,15 @@ BACKUPPATH=~/backups
 
 
 # give a friendly reminder if there's a new version of WP-CLI available
-echo "Checking if you have the latest version of WP-CLI.  
 
-currentwpcli = `wp cli version`
-newwpcli = `wp cli check-update`
-
-if [ -n "$newwpcli"]
+currentwpcli=`wp cli version --field=version`
+newwpcli=`wp cli check-update --field=version`
+if [ -n "$newwpcli" ] #not empty
   then
-  echo "You have $currentwpcli installed. Version $newwpcli is now available - please update the server"
+  printf "\n=======================================================================\n"
+  printf "NOTICE: WP-CLI UPGRADE AVAIALBLE\n\nYou have $currentwpcli installed.\n"
+  printf "Version $newwpcli is now available. Please update WP-CLI on the server\n"
+  printf "=======================================================================\n\n\n"
 fi
 
 

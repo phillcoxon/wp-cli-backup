@@ -134,6 +134,15 @@ then
 wp core update --allow-root;
 fi
 
+read -r -p "Flush persistant object cache? [y/N]" response
+response=${response,,}    # tolower
+if [[ $response =~ ^(yes|y)$ ]]  
+then 
+wp cache flush --allow-root;
+fi
+
+
+
 #Fix permissions
 #sudo chown -R www-data:www-data $SITESTORE
 #sudo find $SITESTORE -type f -exec chmod 644 {} +

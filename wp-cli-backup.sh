@@ -69,17 +69,41 @@ tar -czf $BACKUPPATH/db.$DATE.sql.gz $BACKUPPATH/db.$DATE.sql
 echo "delete local db export $BACKUPPATH/db.$DATE.sql..."
 rm $BACKUPPATH/db.$DATE.sql
 
-# Now we can update
-echo "Updating all plugins..."
+# Now we can update plugins
+echo "Displaying list of plugins with available updates..."
 wp plugin list --update=available
-wp plugin update --all --allow-root;
 
-echo "Updating all themes..."
+read -r -p "Update the above plugins? [y/N]" response
+response=${response,,}    # tolower
+if [[ $response =~ ^(yes|y)$ ]]  
+then 
+    wp plugin update --all --allow-root;
+fi
+
+# Now we can update plugins
+echo "Displaying list of themes with available updates..."
 wp theme list --update=available
-wp theme update --all --allow-root;
 
-echo "Updating core..."
-wp core update
+read -r -p "Update the above plugins? [y/N]" response
+response=${response,,}    # tolower
+if [[ $response =~ ^(yes|y)$ ]]  
+then 
+    
+wp theme update --all --allow-root;
+fi
+
+
+# Now we can update plugins
+
+echo "Checking for Core update..."
+wp core check-update
+read -r -p "Update Core? [y/N]" response
+response=${response,,}    # tolower
+if [[ $response =~ ^(yes|y)$ ]]  
+then 
+    
+wp core update --allow-root;
+fi
 
 #Fix permissions
 #sudo chown -R www-data:www-data $SITESTORE

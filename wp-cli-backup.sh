@@ -1,6 +1,13 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 # Adapted from Mike's example from https://guides.wp-bullet.com/
+clear   
+bold=`tput bold`
+normal=`tput sgr0`
 
+red='\033[1;31m'
+green='\033[1;32m'        
+blue='\033[1;34m'        
+NC='\033[0m' # No Color   
 
 # NOTE: This setup is for DirectAdmin based servers.  
 #       Other servers may have different paths

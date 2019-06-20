@@ -9,6 +9,15 @@ green='\033[1;32m'
 blue='\033[1;34m'        
 NC='\033[0m' # No Color   
 
+#
+#  To ensure we're always using the latest version of the script I tend to pull directly from github and execute.  
+#
+#  bash <(curl -s https://raw.githubusercontent.com/phillcoxon/wp-cli-backup/master/wp-cli-backup.sh)
+#
+#
+# 
+
+
 # NOTE: This setup is for DirectAdmin based servers.  
 #       Other servers may have different paths
 #
@@ -45,6 +54,19 @@ DATE=`date +%Y-%m-%d.%H.%M`
 #where you want to store backups
 BACKUPPATH=~/backups
 
+
+# give a friendly reminder if there's a new version of WP-CLI available
+echo "Checking if you have the latest version of WP-CLI.  
+
+currentwpcli = `wp cli version`
+newwpcli = `wp cli check-update`
+
+if [ -n "$newwpcli"]
+  then
+  echo "You have $currentwpcli installed. Version $newwpcli is now available - please update the server"
+fi
+
+
 #get the current dir path
 cd $WEBROOT
 DIR=`pwd`
@@ -61,7 +83,6 @@ fi
 
 #make sure the backup folder exists
 mkdir -p $BACKUPPATH
-
 
 echo "Backing up plugins to $BACKUPPATH/plugins_$DATE.tar.gz ..."
 tar -czf $BACKUPPATH/plugins_$DATE.tar.gz ./wp-content/plugins/ 

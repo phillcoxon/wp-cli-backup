@@ -59,12 +59,16 @@ BACKUPPATH=~/backups
 
 currentwpcli=`wp cli version --field=version`
 newwpcli=`wp cli check-update --field=version`
-if [ -n "$newwpcli" ] #not empty
+if [ $newwpcli = 'Success: WP-CLI is at the latest version.' ] 
   then
-  printf "\n=======================================================================\n"
-  printf "NOTICE: WP-CLI UPGRADE AVAIALBLE\n\nYou have $currentwpcli installed.\n"
-  printf "Version $newwpcli is now available. Please update WP-CLI on the server\n"
-  printf "=======================================================================\n\n\n"
+     printf "\n=======================================================================\n"
+     printf "NOTICE: WP-CLI IS UP TO DATE\n\nYou have $currentwpcli installed.\n"
+     printf "=======================================================================\n\n\n" 
+  else   
+     printf "\n=======================================================================\n"
+     printf "NOTICE: WP-CLI UPGRADE AVAIALBLE\n\nYou have $currentwpcli installed.\n"
+     printf "Version $newwpcli is now available.\n Please update WP-CLI on the server using 'wp cli update' as root\n"
+     printf "=======================================================================\n\n\n"  
 fi
 
 
@@ -113,7 +117,7 @@ fi
 echo "Displaying list of themes with available updates..."
 wp theme list --update=available
 
-read -r -p "Update the above plugins? [y/N]" response
+read -r -p "Update the above themes? [y/N]" response
 response=${response,,}    # tolower
 if [[ $response =~ ^(yes|y)$ ]]  
 then 

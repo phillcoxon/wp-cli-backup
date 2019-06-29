@@ -59,16 +59,16 @@ BACKUPPATH=~/backups
 
 currentwpcli=`wp cli version --field=version`
 newwpcli=`wp cli check-update --field=version`
-if [ $newwpcli == "Success: WP-CLI is at the latest version." ] 
+if [ "$newwpcli" = "Success: WP-CLI is at the latest version." ];
   then
      printf "\n=======================================================================\n"
      printf "NOTICE: WP-CLI IS UP TO DATE\n\nYou have $currentwpcli installed.\n"
-     printf "=======================================================================\n\n\n" 
-  else   
+     printf "=======================================================================\n\n\n"
+  else
      printf "\n=======================================================================\n"
      printf "NOTICE: WP-CLI UPGRADE AVAIALBLE\n\nYou have $currentwpcli installed.\n"
      printf "Version $newwpcli is now available.\nPlease update WP-CLI on the server using 'wp cli update' as root\n"
-     printf "=======================================================================\n\n\n"  
+     printf "=======================================================================\n\n\n"
 fi
 
 
